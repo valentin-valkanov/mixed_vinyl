@@ -1,3 +1,7 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Create a new record | {{ parent() }}{% endblock %}
+{% block body %}
 <h1>{{ title }}</h1>
 
 {# TODO: add an image of the record #}
@@ -12,3 +16,4 @@
         {% endfor %}
     </ul>
 </div>
+{% endblock %}
