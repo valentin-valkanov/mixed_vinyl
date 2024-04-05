@@ -1,5 +1,7 @@
 <?php
+
 namespace App\Service;
+
 use Psr\Cache\CacheItemInterface;
 use Symfony\Bridge\Twig\Command\DebugCommand;
 use Symfony\Component\Console\Input\ArrayInput;
@@ -20,9 +22,11 @@ class MixRepository
     ) {}
     public function findAll(): array
     {
-//        $output = new BufferedOutput();
-//        $this->twigDebugCommand->run(new ArrayInput([]), $output);
-//        dd($output);
+        /*
+        $output = new BufferedOutput();
+        $this->twigDebugCommand->run(new ArrayInput([]), $output);
+        dd($output);
+        */
         return $this->cache->get('mixes_data', function(CacheItemInterface $cacheItem) {
             $cacheItem->expiresAfter($this->isDebug ? 5 : 60);
             $response = $this->githubContentClient->request('GET', '/SymfonyCasts/vinyl-mixes/main/mixes.json');
