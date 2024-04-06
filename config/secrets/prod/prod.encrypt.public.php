@@ -1,0 +1,3 @@
+<?php // prod.encrypt.public on Sat, 06 Apr 2024 11:34:36 +0200
+
+return "\x889U\xEA\xEE\xB1\xBFBza~\xB6\x3Av\xEEOL\x7C\xF9Cw\xED\xBE\xB6\xE9\xE6Q0pq\x97\x15";
