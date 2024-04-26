@@ -14,7 +14,7 @@ class VinylController extends AbstractController
 {
     public function __construct(
         private bool $isDebug,
-        private MixRepository $mixRepository
+        private VinylMixRepository $mixRepository
     )
     {}
     #[Route('/', name: 'app_homepage')]
@@ -34,10 +34,11 @@ class VinylController extends AbstractController
         ]);
     }
     #[Route('/browse/{slug}', name: 'app_browse')]
-    public function browse(VinylMixRepository $mixRepository, string $slug = null): Response
+    public function browse( VinylMixRepository $mixRepository, string $slug = null): Response
     {
         $genre = $slug ? u(str_replace('-', ' ', $slug))->title(true) : null;
-        $mixes = $mixRepository->findAll();
+
+        $mixes = $mixRepository->findBy([], ['votes' => 'DESC']);
 
 
         return $this->render('vinyl/browse.html.twig', [
