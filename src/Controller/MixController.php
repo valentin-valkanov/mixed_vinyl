@@ -15,15 +15,8 @@ class MixController extends AbstractController
     #[Route('/mix/new')]
     public function new(EntityManagerInterface $entityManager): Response
     {
-        $mix = new VinylMix();
-        $mix->setTitle('Do you Remember... Phil Collins!?!');
-        $mix->setDescription('A pure mix of drummers turned singers!');
-        $genres = ['pop', 'rock'];
-        $mix->setGenre($genres[array_rand($genres)]);
-        $mix->setTrackCount(rand(5, 20));
-        $mix->setVotes(rand(-50, 50));
 
-//        dd($mix);
+
         $entityManager->persist($mix);
         $entityManager->flush();
 
@@ -33,7 +26,7 @@ class MixController extends AbstractController
             $mix->getTrackCount()
         ));
     }
-    #[Route('/mix/{id}', name: 'app_mix_show')]
+    #[Route('/mix/{slug}', name: 'app_mix_show')]
     public function show(VinylMix $mix): Response
     {
        return $this->render('mix/show.html.twig', [
@@ -56,7 +49,7 @@ class MixController extends AbstractController
          $this->addFlash('success', "Vote counted!");
 
          return $this->redirectToRoute('app_mix_show', [
-             'id' => $mix->getId()
+             'slug' => $mix->getSlug()
          ]);
     }
 }
